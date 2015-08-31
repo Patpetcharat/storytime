@@ -1,4 +1,5 @@
 var gulp = require('gulp');
+var autoprefixer = require('gulp-autoprefixer');
 var clean = require('gulp-clean');
 var ejs = require("gulp-ejs");
 var sass = require('gulp-sass');
@@ -7,7 +8,7 @@ var ts = require('gulp-typescript');
 var uglify = require('gulp-uglify');
 var sourcemaps = require('gulp-sourcemaps');
 var watch = require('gulp-watch');
-var server = require('gulp-server-livereload');
+var browserSync = require('browser-sync').create();
 
 
 gulp.task('clean', function () {
@@ -24,8 +25,8 @@ gulp.task('html', ['clean'], function(){
 gulp.task('styles', ['clean'], function(){
 	return gulp.src('src/**/*.scss')
 		.pipe(sourcemaps.init())
-		.pipe(sass({
-			outputStyle: 'compressed'}))
+		.pipe(autoprefixer())
+		.pipe(sass({outputStyle: 'compressed'}))
 		.pipe(minifyCss({compatibility: 'ie8'}))
 		.pipe(sourcemaps.write('maps'))
 		.pipe(gulp.dest('build'));
@@ -42,17 +43,17 @@ gulp.task('scripts', ['clean'], function(){
 		.pipe(gulp.dest('build'));
 });
 
-gulp.task('server', devTasks, function() {
-	return gulp.src('build')
-		.pipe(server({
-			livereload: true,
-			port: 8000
-		}));
+gulp.task('browser-sync', function() {
+    browserSync.init({
+        server: {
+            baseDir: ""
+        }
+    });
 });
 
 
 // Lists of tasks
-var devTasks = ['html', 'styles', 'scripts', 'server'];
+var devTasks = ['html', 'styles', 'scripts', 'browser-sync'];
 
 gulp.task('watch', function () {
 	gulp.watch('src/**/*', devTasks);
