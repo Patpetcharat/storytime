@@ -1,1 +1,1 @@
-document.body.innerHTML += '<div>Hello World</div>';
+//document.body.innerHTML += '<div>Hello World</div>';

@@ -10,29 +10,39 @@ var sourcemaps = require('gulp-sourcemaps');
 var watch = require('gulp-watch');
 var browserSync = require('browser-sync').create();
 
-
-gulp.task('clean', function () {
-	return gulp.src('build', {read: false})
+gulp.task('clean-html', function () {
+	return gulp.src('build/**/*.html', {read: false})
 		.pipe(clean());
 });
 
-gulp.task('html', ['clean'], function(){
-	return gulp.src("src/**/*.ejs")
+gulp.task('clean-styles', function () {
+	return gulp.src('build/styles', {read: false})
+		.pipe(clean());
+});
+
+gulp.task('clean-scripts', function () {
+	return gulp.src('build/scripts', {read: false})
+		.pipe(clean());
+});
+
+gulp.task('html', ['clean-html'], function(){
+	return gulp.src("src/index.ejs")
 	.pipe(ejs())
 	.pipe(gulp.dest("build"));
 });
 
-gulp.task('styles', ['clean'], function(){
+gulp.task('styles', ['clean-styles'], function(){
 	return gulp.src('src/**/*.scss')
 		.pipe(sourcemaps.init())
 		.pipe(autoprefixer())
 		.pipe(sass({outputStyle: 'compressed'}))
 		.pipe(minifyCss({compatibility: 'ie8'}))
 		.pipe(sourcemaps.write('maps'))
-		.pipe(gulp.dest('build'));
+		.pipe(gulp.dest('build'))
+		.pipe(browserSync.stream());
 });
 
-gulp.task('scripts', ['clean'], function(){
+gulp.task('scripts', ['clean-scripts'], function(){
 	return gulp.src('src/**/*.ts')
 		.pipe(sourcemaps.init())
 		.pipe(ts({
@@ -43,21 +53,20 @@ gulp.task('scripts', ['clean'], function(){
 		.pipe(gulp.dest('build'));
 });
 
-gulp.task('browser-sync', function() {
+gulp.task('browser-sync', ['html', 'styles', 'scripts'], function() {
     browserSync.init({
         server: {
-            baseDir: ""
-        }
+            baseDir: "build"
+        },
+        open: false
     });
-});
 
+    gulp.watch('src/**/*.ejs', ['html'], browserSync.reload);
+	gulp.watch('src/styles/**/*', ['styles']);
+	gulp.watch('src/scripts/**/*', ['scripts'], browserSync.reload);
+});
 
 // Lists of tasks
-var devTasks = ['html', 'styles', 'scripts', 'browser-sync'];
+var devTasks = ['html', 'styles', 'scripts'];
 
-gulp.task('watch', function () {
-	gulp.watch('src/**/*', devTasks);
-});
-
-
-gulp.task('default', devTasks);
+gulp.task('default', ['browser-sync']);
