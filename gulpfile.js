@@ -10,6 +10,9 @@ var sourcemaps = require('gulp-sourcemaps');
 var watch = require('gulp-watch');
 var browserSync = require('browser-sync').create();
 
+/**************************************************
+Clean Tasks
+***************************************************/
 gulp.task('clean-html', function () {
 	return gulp.src('build/**/*.html', {read: false})
 		.pipe(clean());
@@ -25,6 +28,9 @@ gulp.task('clean-scripts', function () {
 		.pipe(clean());
 });
 
+/**************************************************
+Process Tasks
+***************************************************/
 gulp.task('html', ['clean-html'], function(){
 	return gulp.src("src/index.ejs")
 	.pipe(ejs())
@@ -39,7 +45,7 @@ gulp.task('styles', ['clean-styles'], function(){
 		.pipe(minifyCss({compatibility: 'ie8'}))
 		.pipe(sourcemaps.write('maps'))
 		.pipe(gulp.dest('build'))
-		.pipe(browserSync.stream());
+		.pipe(browserSync.stream({match: '**/*.css'}));
 });
 
 gulp.task('scripts', ['clean-scripts'], function(){
@@ -53,6 +59,12 @@ gulp.task('scripts', ['clean-scripts'], function(){
 		.pipe(gulp.dest('build'));
 });
 
+/**************************************************
+Watch Tasks
+***************************************************/
+gulp.task('html-watch', ['html'], browserSync.reload);
+gulp.task('scripts-watch', ['scripts'], browserSync.reload);
+
 gulp.task('browser-sync', ['html', 'styles', 'scripts'], function() {
     browserSync.init({
         server: {
@@ -61,9 +73,9 @@ gulp.task('browser-sync', ['html', 'styles', 'scripts'], function() {
         open: false
     });
 
-    gulp.watch('src/**/*.ejs', ['html'], browserSync.reload);
+    gulp.watch('src/**/*.ejs', ['html-watch']);
 	gulp.watch('src/styles/**/*', ['styles']);
-	gulp.watch('src/scripts/**/*', ['scripts'], browserSync.reload);
+	gulp.watch('src/scripts/**/*', ['scripts-watch']);
 });
 
 // Lists of tasks
