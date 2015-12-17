@@ -34,7 +34,8 @@ Process Tasks
 gulp.task('html', ['clean-html'], function(){
 	return gulp.src("src/index.ejs")
 	.pipe(ejs())
-	.pipe(gulp.dest("build"));
+	.pipe(gulp.dest("build"))
+	.pipe(browserSync.stream());
 });
 
 gulp.task('styles', ['clean-styles'], function(){
@@ -56,29 +57,27 @@ gulp.task('scripts', ['clean-scripts'], function(){
 		}))
 		.pipe(uglify())
 		.pipe(sourcemaps.write('maps'))
-		.pipe(gulp.dest('build'));
+		.pipe(gulp.dest('build'))
+		.pipe(browserSync.stream());
 });
 
 /**************************************************
-Watch Tasks
+BrowserSync
 ***************************************************/
-gulp.task('html-watch', ['html'], browserSync.reload);
-gulp.task('scripts-watch', ['scripts'], browserSync.reload);
-
 gulp.task('browser-sync', ['html', 'styles', 'scripts'], function() {
     browserSync.init({
         server: {
             baseDir: "build"
         },
-        open: false
+        open: false // Don't automatically open a new window
     });
 
-    gulp.watch('src/**/*.ejs', ['html-watch']);
+    gulp.watch('src/**/*.ejs', ['html']);
 	gulp.watch('src/styles/**/*', ['styles']);
-	gulp.watch('src/scripts/**/*', ['scripts-watch']);
+	gulp.watch('src/scripts/**/*', ['scripts']);
 });
 
-// Lists of tasks
-var devTasks = ['html', 'styles', 'scripts'];
-
+/**************************************************
+Gulp Tasks
+***************************************************/
 gulp.task('default', ['browser-sync']);
