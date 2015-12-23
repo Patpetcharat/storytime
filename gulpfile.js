@@ -4,7 +4,6 @@ var clean = require('gulp-clean');
 var ejs = require("gulp-ejs");
 var sass = require('gulp-sass');
 var minifyCss = require('gulp-minify-css');
-var ts = require('gulp-typescript');
 var uglify = require('gulp-uglify');
 var sourcemaps = require('gulp-sourcemaps');
 var watch = require('gulp-watch');
@@ -13,7 +12,7 @@ var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
 var browserify = require('browserify');
 var watchify = require('watchify');
-var babel = require('babelify');
+var babelify = require('babelify');
 
 /**************************************************
 Clean Tasks
@@ -56,16 +55,6 @@ gulp.task('styles', ['clean-styles'], function(){
 
 gulp.task('scripts', ['clean-scripts'], function(){
 	return babel_watch();
-
-	// return gulp.src('src/**/*.ts')
-	// 	.pipe(sourcemaps.init())
-	// 	.pipe(ts({
-	// 		noImplicitAny: true
-	// 	}))
-	// 	.pipe(uglify())
-	// 	.pipe(sourcemaps.write('maps'))
-	// 	.pipe(gulp.dest('build'))
-	// 	.pipe(browserSync.stream());
 });
 
 
@@ -73,7 +62,10 @@ gulp.task('scripts', ['clean-scripts'], function(){
 Browserify and Babel Bundling
 ***************************************************/
 function compile(babel_watch) {
-	var bundler = watchify(browserify('./src/scripts/app.js', { debug: true }).transform(babel));
+	var bundler = watchify(browserify('./src/scripts/app.js', { 
+		debug: true,
+		
+	}).transform(babelify, {presets: ["es2015", "react"]}));
 
 	function rebundle() {
 		bundler.bundle()
@@ -88,7 +80,7 @@ function compile(babel_watch) {
 
 	if (babel_watch) {
 		bundler.on('update', function() {
-			console.log('-> bundling...');
+			//console.log('-> bundling...');
 			rebundle();
 		});
 	}
