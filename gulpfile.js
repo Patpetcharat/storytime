@@ -55,16 +55,53 @@ gulp.task('styles', ['clean-styles'], function(){
 });
 
 gulp.task('scripts', ['clean-scripts'], function(){
-	return gulp.src('src/**/*.ts')
-		.pipe(sourcemaps.init())
-		.pipe(ts({
-			noImplicitAny: true
-		}))
-		.pipe(uglify())
-		.pipe(sourcemaps.write('maps'))
-		.pipe(gulp.dest('build'))
-		.pipe(browserSync.stream());
+	return babel_watch();
+
+	// return gulp.src('src/**/*.ts')
+	// 	.pipe(sourcemaps.init())
+	// 	.pipe(ts({
+	// 		noImplicitAny: true
+	// 	}))
+	// 	.pipe(uglify())
+	// 	.pipe(sourcemaps.write('maps'))
+	// 	.pipe(gulp.dest('build'))
+	// 	.pipe(browserSync.stream());
 });
+
+
+/**************************************************
+Browserify and Babel Bundling
+***************************************************/
+function compile(babel_watch) {
+	var bundler = watchify(browserify('./src/scripts/app.js', { debug: true }).transform(babel));
+
+	function rebundle() {
+		bundler.bundle()
+		.on('error', function(err) { console.error(err); this.emit('end'); })
+		.pipe(source('app.js'))
+		.pipe(buffer())
+		.pipe(sourcemaps.init({ loadMaps: true }))
+		.pipe(sourcemaps.write('./'))
+		.pipe(gulp.dest('./build/scripts'))
+		.pipe(browserSync.stream());
+	}
+
+	if (babel_watch) {
+		bundler.on('update', function() {
+			console.log('-> bundling...');
+			rebundle();
+		});
+	}
+
+	rebundle();
+}
+
+function babel_watch() {
+	return compile(true);
+};
+
+
+
 
 /**************************************************
 BrowserSync
@@ -77,9 +114,9 @@ gulp.task('browser-sync', ['html', 'styles', 'scripts'], function() {
         open: false // Don't automatically open a new window
     });
 
-    gulp.watch('src/**/*.ejs', ['html']);
+	gulp.watch('src/**/*.ejs', ['html']);
 	gulp.watch('src/styles/**/*', ['styles']);
-	gulp.watch('src/scripts/**/*', ['scripts']);
+	//gulp.watch('src/scripts/**/*', ['scripts']);
 });
 
 /**************************************************
