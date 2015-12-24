@@ -33,7 +33,7 @@ gulp.task('clean-scripts', function () {
 });
 
 /**************************************************
-Process Tasks
+Development Tasks
 ***************************************************/
 gulp.task('html', ['clean-html'], function(){
 	return gulp.src("src/index.ejs")
@@ -46,8 +46,7 @@ gulp.task('styles', ['clean-styles'], function(){
 	return gulp.src('src/**/*.scss')
 		.pipe(sourcemaps.init())
 		.pipe(autoprefixer())
-		.pipe(sass({outputStyle: 'compressed'}))
-		.pipe(minifyCss({compatibility: 'ie8'}))
+		.pipe(sass({outputStyle: 'expanded'}))
 		.pipe(sourcemaps.write('maps'))
 		.pipe(gulp.dest('build'))
 		.pipe(browserSync.stream({match: '**/*.css'}));
@@ -57,15 +56,40 @@ gulp.task('scripts', ['clean-scripts'], function(){
 	return babel_watch();
 });
 
+/**************************************************
+Production Tasks
+***************************************************/
+gulp.task('html-production', ['clean-html'], function(){
+	return gulp.src("src/index.ejs")
+	.pipe(ejs())
+	.pipe(gulp.dest("build"))
+});
+
+gulp.task('styles-production', ['clean-styles'], function(){
+	return gulp.src('src/**/*.scss')
+		.pipe(autoprefixer())
+		.pipe(sass({outputStyle: 'compressed'}))
+		.pipe(gulp.dest('build'))
+});
+
+gulp.task('scripts-production', ['clean-scripts'], function(){
+	return browserify("./src/scripts/app.js", {debug:false})
+  		.transform("babelify", {presets: ["es2015", "react"]})
+  		.bundle()
+		.on('error', function(err) { console.error(err); this.emit('end'); })
+		.pipe(source('app.js'))
+		.pipe(buffer())
+		.pipe(uglify())
+		.pipe(gulp.dest('./build/scripts'));
+});
+
 
 /**************************************************
 Browserify and Babel Bundling
 ***************************************************/
 function compile(babel_watch) {
-	var bundler = watchify(browserify('./src/scripts/app.js', { 
-		debug: true,
-		
-	}).transform(babelify, {presets: ["es2015", "react"]}));
+	var bundler = watchify(browserify('./src/scripts/app.js', {debug: true})
+		.transform(babelify, {presets: ["es2015", "react"]}));
 
 	function rebundle() {
 		bundler.bundle()
@@ -115,3 +139,4 @@ gulp.task('browser-sync', ['html', 'styles', 'scripts'], function() {
 Gulp Tasks
 ***************************************************/
 gulp.task('default', ['browser-sync']);
+gulp.task('production', ['html-production', 'styles-production', 'scripts-production']);
