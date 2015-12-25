@@ -1,3 +1,3 @@
 export function init() {
-	console.log('test module success');
+	console.log('test module init');
 }
