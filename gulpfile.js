@@ -43,12 +43,12 @@ gulp.task('html', ['clean-html'], function(){
 });
 
 gulp.task('styles', ['clean-styles'], function(){
-	return gulp.src('src/**/*.scss')
+	return gulp.src('src/styles/app.scss')
 		.pipe(sourcemaps.init())
 		.pipe(autoprefixer())
 		.pipe(sass({outputStyle: 'expanded'}))
 		.pipe(sourcemaps.write('maps'))
-		.pipe(gulp.dest('build'))
+		.pipe(gulp.dest('build/styles'))
 		.pipe(browserSync.stream({match: '**/*.css'}));
 });
 
@@ -66,10 +66,10 @@ gulp.task('html-production', ['clean-html'], function(){
 });
 
 gulp.task('styles-production', ['clean-styles'], function(){
-	return gulp.src('src/**/*.scss')
+	return gulp.src('src/styles/app.scss')
 		.pipe(autoprefixer())
 		.pipe(sass({outputStyle: 'compressed'}))
-		.pipe(gulp.dest('build'))
+		.pipe(gulp.dest('build/styles'))
 });
 
 gulp.task('scripts-production', ['clean-scripts'], function(){
@@ -82,7 +82,6 @@ gulp.task('scripts-production', ['clean-scripts'], function(){
 		.pipe(uglify())
 		.pipe(gulp.dest('./build/scripts'));
 });
-
 
 /**************************************************
 Browserify and Babel Bundling
@@ -115,9 +114,6 @@ function compile(babel_watch) {
 function babel_watch() {
 	return compile(true);
 };
-
-
-
 
 /**************************************************
 BrowserSync
