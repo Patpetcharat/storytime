@@ -1,6 +1,8 @@
 var gulp = require('gulp');
 var autoprefixer = require('gulp-autoprefixer');
 var clean = require('gulp-clean');
+var newer = require('gulp-newer');
+var copy = require('gulp-copy');
 var ejs = require("gulp-ejs");
 var sass = require('gulp-sass');
 var minifyCss = require('gulp-minify-css');
@@ -32,6 +34,11 @@ gulp.task('clean-scripts', function () {
 		.pipe(clean());
 });
 
+gulp.task('clean-assets', function () {
+	return gulp.src('build/assets', {read: false})
+		.pipe(clean());
+});
+
 /**************************************************
 Development Tasks
 ***************************************************/
@@ -54,6 +61,12 @@ gulp.task('styles', ['clean-styles'], function(){
 
 gulp.task('scripts', ['clean-scripts'], function(){
 	return babel_watch();
+});
+
+gulp.task('assets', function(){
+	return gulp.src('**/*', {cwd: 'src/assets'})
+		.pipe(newer('build/assets'))
+		.pipe(copy('build/assets'));
 });
 
 /**************************************************
@@ -81,6 +94,11 @@ gulp.task('scripts-production', ['clean-scripts'], function(){
 		.pipe(buffer())
 		.pipe(uglify())
 		.pipe(gulp.dest('./build/scripts'));
+});
+
+gulp.task('assets-production', ['clean-assets'], function(){
+	return gulp.src('**/*', {cwd: 'src/assets'})
+		.pipe(copy('build/assets'));
 });
 
 /**************************************************
@@ -118,7 +136,7 @@ function babel_watch() {
 /**************************************************
 BrowserSync
 ***************************************************/
-gulp.task('browser-sync', ['html', 'styles', 'scripts'], function() {
+gulp.task('browser-sync', ['html', 'styles', 'scripts', 'assets'], function() {
     browserSync.init({
         server: {
             baseDir: "build"
@@ -128,11 +146,12 @@ gulp.task('browser-sync', ['html', 'styles', 'scripts'], function() {
 
 	gulp.watch('src/**/*.ejs', ['html']);
 	gulp.watch('src/styles/**/*', ['styles']);
-	//gulp.watch('src/scripts/**/*', ['scripts']);
+	//gulp.watch('src/scripts/**/*', ['scripts']); // Handled by babel watch instead
+	gulp.watch('src/assets/**/*', ['assets']);
 });
 
 /**************************************************
 Gulp Tasks
 ***************************************************/
 gulp.task('default', ['browser-sync']);
-gulp.task('production', ['html-production', 'styles-production', 'scripts-production']);
+gulp.task('production', ['html-production', 'styles-production', 'scripts-production', 'assets-production']);
