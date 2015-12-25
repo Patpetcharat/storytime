@@ -1,3 +1,11 @@
-body{
-	background-color: grey;
+@import 'node_modules/susy/sass/susy';
+@import 'node_modules/breakpoint-sass/stylesheets/breakpoint';
+
+@import 'global';
+
+@import 'header';
+
+.container{
+	margin: 0 auto;
+	max-width: 960px;
 }

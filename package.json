@@ -8,6 +8,7 @@
     "babel-preset-react": "^6.3.13",
     "babel-preset-stage-0": "^6.3.13",
     "babelify": "^7.2.0",
+    "breakpoint-sass": "^2.6.1",
     "browserify": "^12.0.1",
     "gulp": "^3.9.0",
     "gulp-copy": "0.0.2",
@@ -15,6 +16,8 @@
     "gulp-sourcemaps": "^1.6.0",
     "gulp-typescript": "^2.8.1",
     "jquery": "^2.1.4",
+    "node-bourbon": "^4.2.3",
+    "susy": "^2.2.9",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.6.1"
