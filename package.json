@@ -17,6 +17,8 @@
     "gulp-typescript": "^2.8.1",
     "jquery": "^2.1.4",
     "node-bourbon": "^4.2.3",
+    "react": "^0.14.3",
+    "react-dom": "^0.14.3",
     "susy": "^2.2.9",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
