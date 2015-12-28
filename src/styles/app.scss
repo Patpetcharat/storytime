@@ -2,11 +2,13 @@
 @import 'node_modules/breakpoint-sass/stylesheets/breakpoint';
 
 @import 'normalize';
-@import 'global';
 @import 'grid';
+@import 'global';
+
 
 header{
 	.container{
+		padding-top: 38px; 
 		.logo{
 			width: 269px;
 			height: 71px;
@@ -15,7 +17,9 @@ header{
 }
 
 #cards{
-	
+	.heading{
+		@include span(6);
+	}	
 }
 
 footer{

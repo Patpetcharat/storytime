@@ -52,8 +52,8 @@ gulp.task('html', ['clean-html'], function(){
 gulp.task('styles', ['clean-styles'], function(){
 	return gulp.src('src/styles/app.scss')
 		.pipe(sourcemaps.init())
-		.pipe(autoprefixer())
 		.pipe(sass({outputStyle: 'expanded'}))
+		.pipe(autoprefixer())
 		.pipe(sourcemaps.write('maps'))
 		.pipe(gulp.dest('build/styles'))
 		.pipe(browserSync.stream({match: '**/*.css'}));

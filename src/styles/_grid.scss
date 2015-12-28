@@ -1,9 +1,8 @@
 $susy: (
 	columns: 12,
 	gutters: 1/4,
+	gutter-position: split,
+	box-sizing: border-box,
+	container: 960px,
+	container-position: center
 );
-
-.container{
-	margin: 0 auto;
-	max-width: 960px;
-}
