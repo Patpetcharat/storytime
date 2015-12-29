@@ -2,21 +2,25 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 class Cards extends React.Component{
+	// state = {
+	// 	data: []
+	// }
 	render(){
 		return(
 			<div>
-				<h1>This is a cards component</h1>
-				<Card text="This is a test" />
+				<Card text="test" />
 			</div>
 		);
-		
 	}
 }
 
 class Card extends React.Component{
 	render(){
 		return(
-			<h1>This is a single card component</h1>
+			<div>
+				<h1>This is a single card component</h1>
+				<div>This is the text: {this.props.text}</div>
+			</div>
 		);
 	}
 }
