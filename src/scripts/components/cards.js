@@ -1,10 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import {getCardsData} from '../modules/data.js';
+
 class Cards extends React.Component{
-	// state = {
-	// 	data: []
-	// }
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			data:[]
+		};
+	}
+	componentDidMount(){
+		getCardsData(this);
+	}	
 	render(){
 		return(
 			<div>

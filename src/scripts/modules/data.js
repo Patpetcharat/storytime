@@ -1,6 +1,6 @@
 import $ from 'jquery';
 
-export function getCardsData() {
+export function getCardsData(component) {
 	var url = './assets/data/cards.json';
 
 	fetch(url)
@@ -24,7 +24,14 @@ export function getCardsData() {
 					situations.splice(index, 1);
 				}
 
-				
+				var data;
+				data.characters = selectedCharacters;
+				data.situations = selectedSituations;
+
+				console.log('component:', component);
+				component.setState({
+					data: data
+				});
 			}); 
 		}).catch(function(err) {  
 			console.log('Fetch Error:', err);  
