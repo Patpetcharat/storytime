@@ -1,8 +1,10 @@
-[
-	{"text": "hunger"},
-	{"text": "blind date"},
-	{"text": "at last, love"},
-	{"text": "unwanted inheritance"},
-	{"text": "glue"},
-	{"text": "the last one"},
-]
+{
+	"cards" : [
+		{"text": "hunger"},
+		{"text": "blind date"},
+		{"text": "at last, love"},
+		{"text": "unwanted inheritance"},
+		{"text": "glue"},
+		{"text": "the last one"},
+	]
+}

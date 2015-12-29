@@ -2,14 +2,13 @@ import $ from 'jquery';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import {init} from './modules/test.js';
+import {getCardsData} from './modules/data.js';
+import {renderCardsComponent} from './components/cards.js';
 
 $(document).ready(function(){
 	console.log('ready');
-	init();
+	getCardsData();
 });
 
-ReactDOM.render(
-  <h1>Hello, world!</h1>,
-  document.getElementById('cards')
-);
+renderCardsComponent('cards');
+
