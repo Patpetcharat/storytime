@@ -8,16 +8,32 @@ class Cards extends React.Component{
 		super(props);
 
 		this.state = {
-			data:[]
-		};
+			"data":{
+				"characters" : [],
+				"situations" : []
+			}
+		}
 	}
 	componentDidMount(){
 		getCardsData(this);
 	}	
 	render(){
+		var characterCards = this.state.data.characters.map(function(character, i) {
+			return (
+				<Card key={i} text={character} type="character"/>
+			);	
+		});
+
+		var situationCards = this.state.data.situations.map(function(situation, i) {
+			return (
+				<Card key={i} text={situation} type="situation"/>
+			);	
+		});
+
 		return(
 			<div>
-				<Card text="test" />
+				{characterCards}
+				{situationCards}
 			</div>
 		);
 	}
@@ -26,9 +42,8 @@ class Cards extends React.Component{
 class Card extends React.Component{
 	render(){
 		return(
-			<div>
-				<h1>This is a single card component</h1>
-				<div>This is the text: {this.props.text}</div>
+			<div className={"card " + this.props.type}>
+				<div>{this.props.text}</div>
 			</div>
 		);
 	}

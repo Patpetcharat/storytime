@@ -28,7 +28,7 @@ export function getCardsData(component) {
 				data.characters = selectedCharacters;
 				data.situations = selectedSituations;
 
-				console.log('component:', component);
+				//console.log('component:', component);
 				component.setState({
 					data: data
 				});
