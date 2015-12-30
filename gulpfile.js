@@ -5,7 +5,7 @@ var newer = require('gulp-newer');
 var copy = require('gulp-copy');
 var ejs = require("gulp-ejs");
 var sass = require('gulp-sass');
-var minifyCss = require('gulp-minify-css');
+var nano = require('gulp-cssnano');
 var uglify = require('gulp-uglify');
 var sourcemaps = require('gulp-sourcemaps');
 var watch = require('gulp-watch');
@@ -80,8 +80,9 @@ gulp.task('html-production', ['clean-html'], function(){
 
 gulp.task('styles-production', ['clean-styles'], function(){
 	return gulp.src('src/styles/app.scss')
+		.pipe(sass({outputStyle: 'expanded'}))
 		.pipe(autoprefixer())
-		.pipe(sass({outputStyle: 'compressed'}))
+		.pipe(nano())
 		.pipe(gulp.dest('build/styles'))
 });
 
