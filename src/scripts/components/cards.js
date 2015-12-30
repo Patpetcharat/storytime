@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -16,7 +17,11 @@ class Cards extends React.Component{
 	}
 	componentDidMount(){
 		getCardsData(this);
-	}	
+	}
+	regenerateCards(){
+		console.log('regenerate this:', this);
+		getCardsData(this);
+	}
 	render(){
 		var characterCards = this.state.data.characters.map(function(character, i) {
 			return (
@@ -50,8 +55,12 @@ class Card extends React.Component{
 }
 
 export function renderCardsComponent(id) {
-	ReactDOM.render(
+	return ReactDOM.render(
 		<Cards />,
 		document.getElementById(id)
 	);
+}
+
+export function regenerateCards(){
+
 }

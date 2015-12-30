@@ -4,8 +4,11 @@ import ReactDOM from 'react-dom';
 
 import {renderCardsComponent} from './components/cards.js';
 
-// $(document).ready(function(){
-// 	console.log('ready');
-// });
+$(document).ready(function(){
+	var CardsComponent = renderCardsComponent('cards');
 
-renderCardsComponent('cards');
+	$('#regenerate').click(function(){
+		CardsComponent.regenerateCards();
+	});	
+});
+
