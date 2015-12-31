@@ -22,11 +22,10 @@ $(document).ready(function(){
 
 		TweenLite.delayedCall(transitionTime, function(){
 			CardsComponent.regenerateCards();
-			// After the component updates, the  reveal animation will be 
-			// triggered with a Cards Did Update event
 		});
 	});
 
+	// Handle event triggered when cards are regenerated
 	$(CardsComponent).on('CardsDidUpdate', function(){
 		$('#cards .card').each(function(index, value){
 			TweenLite.fromTo($(this), duration, {
