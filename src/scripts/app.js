@@ -12,8 +12,6 @@ $(document).ready(function(){
 	var stagger = 0.1;
 
 	$('#regenerate').click(function(){
-		console.log('length', $('#cards .card').length);
-
 		var transitionTime = $('#cards .card').length * stagger + duration;
 
 		$('#cards .card').each(function(index, value){
@@ -30,7 +28,6 @@ $(document).ready(function(){
 	});
 
 	$(CardsComponent).on('CardsDidUpdate', function(){
-		console.log('Handle did update');
 		$('#cards .card').each(function(index, value){
 			TweenLite.fromTo($(this), duration, {
 				x:100, opacity:0

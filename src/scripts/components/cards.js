@@ -19,7 +19,6 @@ class Cards extends React.Component{
 		getCardsData(this);
 	}
 	regenerateCards(){
-		console.log('regenerate this:', this);
 		getCardsData(this);
 	}
 	componentDidUpdate(){
