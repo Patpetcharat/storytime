@@ -27,26 +27,13 @@ h1{
 
 .container{
 	@include container;
+
+	@include breakpoint($break-md-max){
+		max-width: 768px;
+	}
 }
 
 .row{
 	@include span(12 of 12);
 	clear: both;
-}
-
-.card{
-	@include span(3);
-	
-	padding: 22px;
-	height: 324px;
-	border-radius: 22px;
-	font-size: 24px;
-	font-weight: 900;
-	background-color: $medium;
-	color: $dark;
-
-	&.situation{
-		background-color: $dark;
-		color: $medium;
-	}
 }

@@ -5,7 +5,6 @@
 @import 'grid';
 @import 'global';
 
-
 header{
 	.container{
 		padding-top: 38px; 
@@ -19,12 +18,56 @@ header{
 #headings{
 	.heading{
 		@include span(6);
+
+		@include breakpoint($break-md-max){
+			@include span(12);
+		}
 	}	
 }
 
 #cards{
 	position: relative;
 	padding-bottom: 70px;
+
+	.section{
+		@include span(6 nest);
+
+		@include breakpoint($break-md-max){
+			@include span(12);
+		}
+
+		h1{
+			@include span(12);
+		}
+
+		.card{
+			@include span(3 of 6);
+
+			padding: 22px;
+			height: 324px;
+			border-radius: 22px;
+			font-size: 24px;
+			font-weight: 900;
+			background-color: $medium;
+			color: $dark;
+
+			&.situation{
+				background-color: $dark;
+				color: $medium;
+			}
+
+			@include breakpoint($break-md-max){
+				height: 200px;
+				margin-bottom: gutter(12);
+			}
+
+			@include breakpoint($break-sm-max){
+				@include span(6 of 6);
+			}
+		}
+	}
+
+	
 }
 
 footer{

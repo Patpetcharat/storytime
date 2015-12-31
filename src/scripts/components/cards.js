@@ -39,8 +39,14 @@ class Cards extends React.Component{
 
 		return(
 			<div>
-				{characterCards}
-				{situationCards}
+				<div className="characters section">
+					<h1 className="lato medium">the Character</h1>
+					{characterCards}
+				</div>
+				<div className="situations section">
+					<h1 className="lato dark">the Situation</h1>
+					{situationCards}
+				</div>
 			</div>
 		);
 	}
