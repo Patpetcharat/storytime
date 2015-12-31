@@ -1,18 +1,42 @@
 {
-	"characters" : [
-		{"text": "person who knows the future"},
-		{"text": "person who has broken something that cannot be replaced"},
-		{"text": "future president"},
-		{"text": "runaway"},
-		{"text": "person of a different size than most people"},
-		{"text": "guest"}
-	],
-	"situations" : [
-		{"text": "hunger"},
-		{"text": "blind date"},
-		{"text": "at last, love"},
-		{"text": "unwanted inheritance"},
-		{"text": "glue"},
-		{"text": "the last one"}
-	]
+    "characters": [
+        {
+            "text": "person who knows the future"
+        },
+        {
+            "text": "person who has broken something that cannot be replaced"
+        },
+        {
+            "text": "future president"
+        },
+        {
+            "text": "runaway"
+        },
+        {
+            "text": "person of a different size than most people"
+        },
+        {
+            "text": "guest"
+        }
+    ],
+    "situations": [
+        {
+            "text": "hunger"
+        },
+        {
+            "text": "blind date"
+        },
+        {
+            "text": "at last, love"
+        },
+        {
+            "text": "unwanted inheritance"
+        },
+        {
+            "text": "glue"
+        },
+        {
+            "text": "the last one"
+        }
+    ]
 }

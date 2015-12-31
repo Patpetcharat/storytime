@@ -22,6 +22,9 @@ class Cards extends React.Component{
 		console.log('regenerate this:', this);
 		getCardsData(this);
 	}
+	componentDidUpdate(){
+		$(this).trigger('CardsDidUpdate');
+	}
 	render(){
 		var characterCards = this.state.data.characters.map(function(character, i) {
 			return (
