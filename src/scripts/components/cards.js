@@ -56,7 +56,7 @@ class Card extends React.Component{
 	render(){
 		return(
 			<div className={"card " + this.props.type}>
-				<div>{this.props.text}</div>
+				<div className="text">{this.props.text}</div>
 			</div>
 		);
 	}

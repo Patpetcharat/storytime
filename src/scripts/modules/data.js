@@ -3,10 +3,10 @@ import $ from 'jquery';
 export function getCardsData(component) {
 	var url = './assets/data/cards.json';
 
-	var characters = JSON.parse(window.localStorage.getItem('characters'));
-	var situations = JSON.parse(window.localStorage.getItem('situations'));
+	var characters = JSON.parse(window.localStorage.getItem('characters')) || [];
+	var situations = JSON.parse(window.localStorage.getItem('situations')) || [];
 
-	if(characters.length >= 2){
+	if(characters && characters.length >= 2){
 		setCardsData(component, characters, situations);
 	}else{
 		fetch(url).then(function(res){
@@ -20,11 +20,12 @@ export function getCardsData(component) {
 			console.log('Fetch Error:', err);  
 		});
 	}
-
-	
 }
 
 function setCardsData(component, characters, situations){
+	console.log('characters:', characters);
+	console.log('situations:', situations);
+
 	var selectedCharacters = [];
 	var selectedSituations = [];
 
