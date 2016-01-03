@@ -16,6 +16,16 @@ h1{
 	font-size: 38px;
 }
 
+a{
+	text-decoration: none;
+	color: $medium;
+	transition: color 0.25s ease;
+
+	&:hover{
+		color: $dark;
+	}
+}
+
 // Colors
 .light{
 	color: $light;

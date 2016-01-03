@@ -43,7 +43,7 @@ gulp.task('clean-assets', function () {
 Development Tasks
 ***************************************************/
 gulp.task('html', ['clean-html'], function(){
-	return gulp.src("src/index.ejs")
+	return gulp.src("src/*.ejs")
 	.pipe(ejs())
 	.pipe(gulp.dest("build"))
 	.pipe(browserSync.stream());

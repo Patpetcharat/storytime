@@ -8,9 +8,28 @@
 header{
 	.container{
 		padding-top: 38px; 
-		.logo{
-			width: 269px;
-			height: 71px;
+
+		a{
+			display: inline-block;
+
+			.logo{
+				width: 269px;
+				height: 71px;
+				pointer-events: none;
+			}
+		}
+		
+		ul.menu{
+			float: right;
+			list-style: none;
+
+			li{
+				display: inline;
+				margin-left: 20px;
+				font-size: 23px;
+				color: $medium;
+				font-family: 'Lato', sans-serif;
+			}
 		}
 	}
 }
@@ -88,6 +107,7 @@ footer{
 	background-color: $dark;
 	color: $medium;
 	text-align: center;
+	border-top: 1px solid rgba(255,255,255,0.1);
 
 	.container{
 		display: table-cell;
@@ -98,6 +118,10 @@ footer{
 			padding: 4px 20px;
 			font-size: 36px;
 			font-weight: 900;
+
+			&:hover{
+				color: $light;
+			}
 		}
 	}
 }
