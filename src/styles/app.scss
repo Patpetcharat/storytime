@@ -46,7 +46,7 @@ header{
 
 #cards{
 	position: relative;
-	padding-bottom: 70px;
+	padding-bottom: 80px;
 
 	.section{
 		@include span(6 nest);
@@ -99,12 +99,13 @@ header{
 	margin-top: 20px;
 
 	.content{
-		
+
 	}
 }
 
 #buy{
 	margin-top: 20px;
+	margin-bottom: 40px;
 
 	.description{
 		margin-bottom: 80px;
@@ -115,11 +116,24 @@ header{
 
 		a{
 			color: $dark;
+			font-size: 20px;
+			font-weight: 900;
+			transition: all 0.25s ease;
+
+			img{
+				margin-bottom: 10px;
+				border: 10px solid $medium;
+				transition: border 0.25s ease;
+			}
+
+			&:hover{
+				img{
+					border: 10px solid $dark;
+				}
+			}
 		}
 
-		img{
-			border: 10px solid $medium;
-		}
+		
 	}
 	
 }
