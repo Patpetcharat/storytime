@@ -16,7 +16,7 @@ export function getCardsData(component) {
 				
 				setCardsData(component, characters, situations);
 			}); 
-		}).catch(function(err) {  
+		}).catch(function(err) {
 			console.log('Fetch Error:', err);  
 		});
 	}

@@ -93,7 +93,34 @@ header{
 			}
 		}
 	}
+}
 
+#how-to-play{
+	margin-top: 20px;
+
+	.content{
+		
+	}
+}
+
+#buy{
+	margin-top: 20px;
+
+	.description{
+		margin-bottom: 80px;
+	}
+
+	.affiliate{
+		text-align: center;
+
+		a{
+			color: $dark;
+		}
+
+		img{
+			border: 10px solid $medium;
+		}
+	}
 	
 }
 
