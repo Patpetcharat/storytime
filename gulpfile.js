@@ -73,7 +73,7 @@ gulp.task('assets', function(){
 Production Tasks
 ***************************************************/
 gulp.task('html-production', ['clean-html'], function(){
-	return gulp.src("src/index.ejs")
+	return gulp.src("src/*.ejs")
 	.pipe(ejs())
 	.pipe(gulp.dest("build"))
 });
