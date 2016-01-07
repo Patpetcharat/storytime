@@ -1,4 +1,5 @@
 var gulp = require('gulp');
+var merge = require('merge-stream');
 var autoprefixer = require('gulp-autoprefixer');
 var clean = require('gulp-clean');
 var newer = require('gulp-newer');
@@ -64,9 +65,15 @@ gulp.task('scripts', ['clean-scripts'], function(){
 });
 
 gulp.task('assets', function(){
-	return gulp.src('**/*', {cwd: 'src/assets'})
+	var assets = gulp.src('**/*', {cwd: 'src/assets'})
 		.pipe(newer('build/assets'))
 		.pipe(copy('build/assets'));
+
+	var robots = gulp.src('robots.txt', {cwd: 'src'})
+		.pipe(newer('build'))
+		.pipe(copy('build'));
+
+	return merge(assets, robots);
 });
 
 /**************************************************
@@ -98,8 +105,13 @@ gulp.task('scripts-production', ['clean-scripts'], function(){
 });
 
 gulp.task('assets-production', ['clean-assets'], function(){
-	return gulp.src('**/*', {cwd: 'src/assets'})
+	var assets = gulp.src('**/*', {cwd: 'src/assets'})
 		.pipe(copy('build/assets'));
+
+	var robots = gulp.src('robots.txt', {cwd: 'src'})
+		.pipe(copy('build'));
+
+	return merge(assets, robots);
 });
 
 /**************************************************
