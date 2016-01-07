@@ -1,25 +1,46 @@
 import $ from 'jquery';
 
+var fetchedData;
+var url = './assets/data/cards.json';
+var characters;
+var situations;
+
+var requiredDataObjects = [characters, situations];
+
 export function getCardsData(component) {
-	var url = './assets/data/cards.json';
+	characters = JSON.parse(window.localStorage.getItem('characters')) || [];
+	situations = JSON.parse(window.localStorage.getItem('situations')) || [];
 
-	var characters = JSON.parse(window.localStorage.getItem('characters')) || [];
-	var situations = JSON.parse(window.localStorage.getItem('situations')) || [];
-
-	if(characters && characters.length >= 2){
+	if(characters && situations && characters.length >= 2 && situations.length >= 2){
 		setCardsData(component, characters, situations);
 	}else{
-		fetch(url).then(function(res){
-			res.json().then(function(data) {
-				characters = data.characters;
-				situations = data.situations;
-				
-				setCardsData(component, characters, situations);
-			}); 
-		}).catch(function(err) {
-			console.log('Fetch Error:', err);  
-		});
+		if(fetchedData){
+			characters = fetchedData.characters.slice();
+			situations = fetchedData.situations.slice();
+
+			console.log('already fetched:', fetchedData);
+
+			setCardsData(component, characters, situations);
+		}else{
+			console.log('fetch');
+			fetch(url).then(function(res){
+				res.json().then(function(data) {
+					fetchedData = data;
+
+					characters = fetchedData.characters.slice();
+					situations = fetchedData.situations.slice();
+					
+					setCardsData(component, characters, situations);
+				}); 
+			}).catch(function(err) {
+				console.log('Fetch Error:', err);  
+			});
+		}	
 	}
+}
+
+function checkCardsData(){
+
 }
 
 function setCardsData(component, characters, situations){
