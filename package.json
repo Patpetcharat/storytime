@@ -16,6 +16,7 @@
     "gulp-cssnano": "^2.0.0",
     "gulp-newer": "^1.1.0",
     "gulp-sourcemaps": "^1.6.0",
+    "gulp-strip-debug": "^1.1.0",
     "gulp-typescript": "^2.8.1",
     "jquery": "^2.1.4",
     "merge-stream": "^1.0.0",

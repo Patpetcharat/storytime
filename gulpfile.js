@@ -8,6 +8,7 @@ var ejs = require("gulp-ejs");
 var sass = require('gulp-sass');
 var nano = require('gulp-cssnano');
 var uglify = require('gulp-uglify');
+var stripDebug = require('gulp-strip-debug');
 var sourcemaps = require('gulp-sourcemaps');
 var watch = require('gulp-watch');
 var browserSync = require('browser-sync').create();
@@ -100,6 +101,7 @@ gulp.task('scripts-production', ['clean-scripts'], function(){
 		.on('error', function(err) { console.error(err); this.emit('end'); })
 		.pipe(source('app.js'))
 		.pipe(buffer())
+		.pipe(stripDebug())
 		.pipe(uglify())
 		.pipe(gulp.dest('./build/scripts'));
 });
@@ -167,4 +169,4 @@ gulp.task('browser-sync', ['html', 'styles', 'scripts', 'assets'], function() {
 Gulp Tasks
 ***************************************************/
 gulp.task('default', ['browser-sync']);
-gulp.task('production', ['html-production', 'styles-production', 'scripts-production', 'assets-production']);
+gulp.task('dist', ['html-production', 'styles-production', 'scripts-production', 'assets-production']);
