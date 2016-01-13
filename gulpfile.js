@@ -69,7 +69,7 @@ gulp.task('assets', function(){
 		.pipe(newer('build/assets'))
 		.pipe(copy('build/assets'));
 
-	var robots = gulp.src('robots.txt', {cwd: 'src'})
+	var robots = gulp.src(['robots.txt', 'favicon.ico'], {cwd: 'src'})
 		.pipe(newer('build'))
 		.pipe(copy('build'));
 
@@ -108,7 +108,7 @@ gulp.task('assets-production', ['clean-assets'], function(){
 	var assets = gulp.src('**/*', {cwd: 'src/assets'})
 		.pipe(copy('build/assets'));
 
-	var robots = gulp.src('robots.txt', {cwd: 'src'})
+	var robots = gulp.src(['robots.txt', 'favicon.ico'], {cwd: 'src'})
 		.pipe(copy('build'));
 
 	return merge(assets, robots);

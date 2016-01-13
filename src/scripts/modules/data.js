@@ -4,43 +4,58 @@ var fetchedData;
 var url = './assets/data/cards.json';
 var characters;
 var situations;
+var dataIsFetching = false;
 
 var requiredDataObjects = [characters, situations];
 
-export function getCardsData(component) {
+var component;
+
+export function getCardsData(_component) {
+	component = _component;
 	characters = JSON.parse(window.localStorage.getItem('characters')) || [];
 	situations = JSON.parse(window.localStorage.getItem('situations')) || [];
 
-	if(characters && situations && characters.length >= 2 && situations.length >= 2){
+	if(characters.length >= 2 && situations.length >= 2){
 		setCardsData(component, characters, situations);
 	}else{
-		if(fetchedData){
-			characters = fetchedData.characters.slice();
-			situations = fetchedData.situations.slice();
+		fetchData();
+	}
+}
 
-			console.log('already fetched:', fetchedData);
+function fetchData(){
+	if(fetchedData){
+		console.log('already fetched:', fetchedData);
 
-			setCardsData(component, characters, situations);
+		characters = fetchedData.characters.slice();
+		situations = fetchedData.situations.slice();
+
+		setCardsData(component, characters, situations);
+	}else{
+		if(dataIsFetching){
+			console.log('fetching already in progress');
 		}else{
-			console.log('fetch');
+			console.log('start fetching');
 			fetch(url).then(function(res){
 				res.json().then(function(data) {
 					fetchedData = data;
 
-					characters = fetchedData.characters.slice();
-					situations = fetchedData.situations.slice();
+					if(characters.length < 2){
+						characters = fetchedData.characters.slice();
+					}
+
+					if(situations.length < 2){
+						situations = fetchedData.situations.slice();
+					}
+
+					dataIsFetching = false;
 					
 					setCardsData(component, characters, situations);
 				}); 
 			}).catch(function(err) {
 				console.log('Fetch Error:', err);  
 			});
-		}	
+		}
 	}
-}
-
-function checkCardsData(){
-
 }
 
 function setCardsData(component, characters, situations){
