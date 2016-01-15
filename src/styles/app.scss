@@ -23,18 +23,31 @@ header{
 			float: right;
 			list-style: none;
 
+			@include breakpoint($break-sm-max){
+				float: none;
+				display: block;
+				padding: 0;
+			}
+
 			li{
 				display: inline;
 				margin-left: 20px;
 				font-size: 23px;
 				color: $medium;
 				font-family: 'Lato', sans-serif;
+
+				@include breakpoint($break-sm-max){
+					margin-left: 0;
+					margin-right: 20px;
+				}
 			}
 		}
 	}
 }
 
 #headings{
+	padding: gutter(12);
+
 	.heading{
 		@include span(6);
 
@@ -50,9 +63,17 @@ header{
 
 	.section{
 		@include span(6 nest);
+		
+		&:nth-child(2n) {
+			@include span(6 nest last);
+		}
 
 		@include breakpoint($break-md-max){
 			@include span(12);
+
+			&:nth-child(2n) {
+				@include span(12);
+			}
 		}
 
 		h1{
@@ -61,6 +82,10 @@ header{
 
 		.card{
 			@include span(3 of 6);
+
+			&:nth-child(2n) {
+				@include span(3 of 6 last);
+			}
 
 			padding: 22px;
 			height: 324px;
@@ -76,6 +101,11 @@ header{
 			}
 
 			@include breakpoint($break-md-max){
+				@include span(6 of 12);
+
+				&:nth-child(2n) {
+					@include span(6 of 12 last);
+				}
 				height: 200px;
 				margin-bottom: gutter(6);
 				display: table;

@@ -5,8 +5,14 @@ $break-md-max: max-width 990px;
 $susy: (
 	columns: 12,
 	gutters: 1/4,
-	gutter-position: split,
+	gutter-position: right,
 	box-sizing: border-box,
 	container: 960px,
-	container-position: center
+	container-position: center,
+	debug: (
+		image: show-columns,
+		color: rgba(#66f, .25),
+		output: background,
+		toggle: top right,
+	)
 );
