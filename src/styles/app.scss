@@ -7,7 +7,11 @@
 
 header{
 	.container{
-		padding-top: 38px; 
+		padding-top: 38px;
+
+		@include breakpoint($break-sm-max){
+			padding-top: 20px;
+		}
 
 		a{
 			display: inline-block;
@@ -70,6 +74,7 @@ header{
 
 		@include breakpoint($break-md-max){
 			@include span(12);
+			margin-bottom: 10px;
 
 			&:nth-child(2n) {
 				@include span(12);
@@ -78,6 +83,14 @@ header{
 
 		h1{
 			@include span(12);
+
+			@include breakpoint($break-md-max){
+				margin: 20px 0 10px 0;
+			}
+
+			@include breakpoint($break-sm-max){
+				margin: 10px 0 10px 0;
+			}
 		}
 
 		.card{
@@ -118,7 +131,11 @@ header{
 			}
 
 			@include breakpoint($break-sm-max){
-				@include span(6 of 6);
+				@include span(12);
+
+				&:nth-child(2n) {
+					@include span(12);
+				}
 				height: 40vw;
 			}
 		}

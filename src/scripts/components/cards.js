@@ -44,7 +44,7 @@ class Cards extends React.Component{
 					{characterCards}
 				</div>
 				<div className="situations section">
-					<h1 className="lato dark">the Situation</h1>
+					<h1 className="lato dark">the Elements</h1>
 					{situationCards}
 				</div>
 			</div>
