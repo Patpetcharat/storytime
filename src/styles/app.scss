@@ -5,6 +5,14 @@
 @import 'grid';
 @import 'global';
 
+// Highlighting the menu
+#how-to-play #how-to-play,
+#buy #buy{
+	a{
+		color: $dark;
+	}
+}
+
 header{
 	.container{
 		padding-top: 38px;
@@ -143,46 +151,45 @@ header{
 }
 
 #how-to-play{
-	margin-top: 20px;
-
 	.content{
-
-	}
+		margin-top: 20px;
+	}		
 }
 
 #buy{
-	margin-top: 20px;
-	margin-bottom: 40px;
+	.content{
+		margin-top: 20px;
+		margin-bottom: 40px;
 
-	.description{
-		margin-bottom: 80px;
-	}
-
-	.affiliate{
-		text-align: center;
-
-		a{
-			color: $dark;
-			font-size: 20px;
-			font-weight: 900;
-			transition: all 0.25s ease;
-
-			img{
-				margin-bottom: 10px;
-				border: 10px solid $medium;
-				transition: border 0.25s ease;
-			}
-
-			&:hover{
-				img{
-					border: 10px solid $dark;
-				}
-			}
+		.description{
+			margin-bottom: 80px;
 		}
 
-		
+		.affiliate{
+			text-align: center;
+
+			a{
+				color: $dark;
+				font-size: 20px;
+				font-weight: 900;
+				transition: all 0.25s ease;
+
+				img{
+					margin-bottom: 10px;
+					border: 10px solid $medium;
+					transition: border 0.25s ease;
+				}
+
+				&:hover{
+					img{
+						border: 10px solid $dark;
+					}
+				}
+			}
+
+			
+		}
 	}
-	
 }
 
 footer{

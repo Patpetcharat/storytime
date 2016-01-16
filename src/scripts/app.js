@@ -11,6 +11,11 @@ $(document).ready(function(){
 	var duration = 0.5;
 	var stagger = 0.1;
 
+	// Select the menu
+	var href = window.location.href;
+	var page = href.substr(href.lastIndexOf('/') + 1);
+	console.log('page:', page);
+
 	$('#regenerate').click(function(){
 		var transitionTime = $('#cards .card').length * stagger + duration;
 
