@@ -73,6 +73,14 @@ header{
 	position: relative;
 	padding-bottom: 80px;
 
+	@include breakpoint($break-md-max){
+		padding-top: 20px;
+	}
+
+	@include breakpoint($break-sm-max){
+		padding-top: 0;
+	}
+
 	.section{
 		@include span(6 nest);
 		
@@ -82,7 +90,7 @@ header{
 
 		@include breakpoint($break-md-max){
 			@include span(12);
-			margin-bottom: 10px;
+			margin-bottom: 20px;
 
 			&:nth-child(2n) {
 				@include span(12);
@@ -92,12 +100,32 @@ header{
 		h1{
 			@include span(12);
 
+			margin: 25px 0 10px 0;
+
 			@include breakpoint($break-md-max){
-				margin: 20px 0 10px 0;
+				margin: 0 0 10px 0;
 			}
 
 			@include breakpoint($break-sm-max){
 				margin: 10px 0 10px 0;
+			}
+		}
+
+		.cards-container{
+			@include breakpoint($break-sm-max){
+				padding: 22px;
+				border-radius: 18px;
+				background-color: $medium;
+				overflow: hidden;	
+			}
+		}
+
+		&.situations{
+			.cards-container{
+				@include breakpoint($break-sm-max){
+					background-color: $dark;
+				}
+
 			}
 		}
 
@@ -119,6 +147,10 @@ header{
 			&.situation{
 				background-color: $dark;
 				color: $medium;
+
+				@include breakpoint($break-sm-max){
+					background-color: transparent;
+				}
 			}
 
 			@include breakpoint($break-md-max){
@@ -128,7 +160,6 @@ header{
 					@include span(6 of 12 last);
 				}
 				height: 200px;
-				margin-bottom: gutter(6);
 				display: table;
 
 				.text{
@@ -144,7 +175,22 @@ header{
 				&:nth-child(2n) {
 					@include span(12);
 				}
-				height: 40vw;
+				
+				height: auto;
+				text-align: left;
+				padding: 0;
+				margin-bottom: 14px;
+				background-color: transparent;
+
+				&:last-child{
+					margin-bottom: 0;
+				}
+
+				.text{
+					display: inline-block;
+					text-align: left;
+				}
+
 			}
 		}
 	}
@@ -153,6 +199,10 @@ header{
 #how-to-play{
 	.content{
 		margin-top: 40px;
+
+		@include breakpoint($break-sm-max){
+			margin-top: 0px;
+		}
 	}		
 }
 
@@ -160,6 +210,10 @@ header{
 	.content{
 		margin-top: 40px;
 		margin-bottom: 40px;
+
+		@include breakpoint($break-sm-max){
+			margin-top: 0px;
+		}
 
 		.description{
 			margin-bottom: 80px;

@@ -11,11 +11,6 @@ $(document).ready(function(){
 	var duration = 0.5;
 	var stagger = 0.1;
 
-	// Select the menu
-	var href = window.location.href;
-	var page = href.substr(href.lastIndexOf('/') + 1);
-	console.log('page:', page);
-
 	$('#regenerate').click(function(){
 		var transitionTime = $('#cards .card').length * stagger + duration;
 
@@ -24,6 +19,14 @@ $(document).ready(function(){
 				x:-$(this).position().left, opacity:0, delay:stagger*index
 			});
 		});
+
+		if($(window).width() < 768){
+			$('.cards-container').each(function(){
+				TweenLite.set($(this), {height:$(this).height()});
+			});
+		}else{
+			TweenLite.set('.cards-container', {height:'auto'});
+		}
 
 		TweenLite.delayedCall(transitionTime, function(){
 			CardsComponent.regenerateCards();
@@ -39,6 +42,21 @@ $(document).ready(function(){
 				x:0, opacity:1, delay:stagger*index
 			});
 		});
+
+		if($(window).width() < 768){
+			$('.cards-container').each(function(){
+				var newHeight = 0;
+
+				$(this).children().each(function(){
+					newHeight += $(this).outerHeight();
+					console.log('newHeight', newHeight);
+				});
+
+				newHeight += parseInt($(this).css('padding-bottom'), 10);
+
+				TweenLite.to($(this), 0.25, {height: newHeight});
+			});
+		}
 	});
 });
 

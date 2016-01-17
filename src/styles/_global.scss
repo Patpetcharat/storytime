@@ -8,6 +8,8 @@ body{
 	font-family: 'Roboto', sans-serif;
 	width: 100%;
 	height: 100%;
+
+	overflow-x: hidden; // disables horizontal scroll
 }
 
 h1{
