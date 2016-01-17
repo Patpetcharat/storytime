@@ -36,25 +36,6 @@ function fetchData(){
 			console.log('fetching already in progress');
 		}else{
 			console.log('start fetching');
-			// fetch(url).then(function(res){
-			// 	res.json().then(function(data) {
-			// 		fetchedData = data;
-
-			// 		if(characters.length < 2){
-			// 			characters = fetchedData.characters.slice();
-			// 		}
-
-			// 		if(situations.length < 2){
-			// 			situations = fetchedData.situations.slice();
-			// 		}
-
-			// 		dataIsFetching = false;
-					
-			// 		setCardsData(component, characters, situations);
-			// 	}); 
-			// }).catch(function(err) {
-			// 	console.log('Fetch Error:', err);  
-			// });
 
 			$.getJSON( url, function(res) {
 				console.log( "success: ", res );
