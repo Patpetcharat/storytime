@@ -16,11 +16,15 @@ h1{
 	font-size: 38px;
 }
 
-p{
+p, span, li{
 	font-family: 'Roboto', sans-serif;
 	font-size: 18px;
 	line-height: 1.6em;
 	color: $dark;
+}
+
+ul{
+	padding-left: 1em;
 }
 
 a{

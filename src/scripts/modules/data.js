@@ -1,6 +1,6 @@
 import $ from 'jquery';
 
-var fetchedData;
+var fetchedData = null;
 var url = './assets/data/cards.json';
 var characters;
 var situations;
@@ -16,6 +16,7 @@ export function getCardsData(_component) {
 	situations = JSON.parse(window.localStorage.getItem('situations')) || [];
 
 	if(characters.length >= 2 && situations.length >= 2){
+		console.log('already have enough data');
 		setCardsData(component, characters, situations);
 	}else{
 		fetchData();
@@ -35,24 +36,47 @@ function fetchData(){
 			console.log('fetching already in progress');
 		}else{
 			console.log('start fetching');
-			fetch(url).then(function(res){
-				res.json().then(function(data) {
-					fetchedData = data;
+			// fetch(url).then(function(res){
+			// 	res.json().then(function(data) {
+			// 		fetchedData = data;
 
-					if(characters.length < 2){
-						characters = fetchedData.characters.slice();
-					}
+			// 		if(characters.length < 2){
+			// 			characters = fetchedData.characters.slice();
+			// 		}
 
-					if(situations.length < 2){
-						situations = fetchedData.situations.slice();
-					}
+			// 		if(situations.length < 2){
+			// 			situations = fetchedData.situations.slice();
+			// 		}
 
-					dataIsFetching = false;
+			// 		dataIsFetching = false;
 					
-					setCardsData(component, characters, situations);
-				}); 
-			}).catch(function(err) {
-				console.log('Fetch Error:', err);  
+			// 		setCardsData(component, characters, situations);
+			// 	}); 
+			// }).catch(function(err) {
+			// 	console.log('Fetch Error:', err);  
+			// });
+
+			$.getJSON( url, function(res) {
+				console.log( "success: ", res );
+				console.log(" success characters:", res.characters);
+				
+				//JSON.parse(res);
+				fetchedData = res;
+
+				if(characters.length < 2){
+					characters = res.characters.slice();
+				}
+
+				if(situations.length < 2){
+					situations = res.situations.slice();
+				}
+
+				dataIsFetching = false;
+				
+				setCardsData(component, characters, situations);
+			})
+			.fail(function() {
+				console.log( "error" );
 			});
 		}
 	}
