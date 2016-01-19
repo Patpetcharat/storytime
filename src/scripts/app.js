@@ -31,6 +31,9 @@ $(document).ready(function(){
 		TweenLite.delayedCall(transitionTime, function(){
 			CardsComponent.regenerateCards();
 		});
+
+		// Track Event
+		ga('send', 'event', 'Regenerate', 'click', 'Main Regenerate Button');
 	});
 
 	// Handle event triggered when cards are regenerated

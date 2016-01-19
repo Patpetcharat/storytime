@@ -54,7 +54,7 @@ a{
 	@include container;
 
 	@include breakpoint($break-md-max){
-		max-width: 768px;
+		max-width: 720px;
 		overflow: hidden;
 		padding-right: gutter(12);
 		padding-left: gutter(12);

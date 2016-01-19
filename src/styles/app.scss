@@ -38,6 +38,7 @@ header{
 			@include breakpoint($break-sm-max){
 				float: none;
 				display: block;
+				margin-top: 0;
 				padding: 0;
 			}
 
@@ -107,7 +108,7 @@ header{
 			}
 
 			@include breakpoint($break-sm-max){
-				margin: 10px 0 10px 0;
+				margin: 10px 0 6px 0;
 			}
 		}
 
